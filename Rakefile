@@ -10,6 +10,14 @@ task :console do
   Pry.start
 end
 
+desc 'Reset seeds and primary keys'
+task :reset_seeds do
+  Rake::Task['db:drop'].invoke        # Drop the database
+  Rake::Task['db:create'].invoke      # Recreate the database
+  Rake::Task['db:migrate'].invoke     # Run migrations to recreate the tables
+  Rake::Task['db:seed'].invoke        # Seed the database
+end
+
 desc "Start the server"
 task :server do  
   if ActiveRecord::Base.connection.migration_context.needs_migration?
