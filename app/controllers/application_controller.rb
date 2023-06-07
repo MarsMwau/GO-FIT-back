@@ -38,9 +38,39 @@ class ApplicationController < Sinatra::Base
     end
 
     # Post controllers
-    post '/users' do
-        user = User.create(params[:user])
-        user.to_json
+    post '/signup' do
+        data = JSON.parse(request.body.read)
+        # Create a new User object with the received data
+        user = User.new(
+            user_name: data['user_name'],
+            email: data['email'],
+            age: data['age'],
+            height: data['height'],
+            weight: data['weight']
+        )
+        # Validate and save the user object to the database
+        if user.save
+            status 201
+            { message: 'User created successfully!' }.to_json
+        else
+            status 400
+            { message: 'User not Created try again Later' }.to_json
+        end
+    end
+    
+    # User Login - POST route
+    post '/login' do
+        # Parse the JSON payload sent from the frontend
+        data = JSON.parse(request.body.read)
+        # Check if the email exists in the database
+        user = User.find_by(email: data['email'])
+        if user
+            status 200
+            { message: 'Login successful' }.to_json
+        else
+            status 404
+            { error: 'User not found' }.to_json
+        end
     end
     
     post '/workoutplans' do
