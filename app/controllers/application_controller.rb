@@ -4,27 +4,31 @@ class ApplicationController < Sinatra::Base
     # Get controllers
     get '/users' do
         users = User.all
-        users.to_json
+        users.to_json(include: :workout_plans)
     end
 
     get '/user/:id' do
         user = User.find(params[:id])
-        user.to_json
+        user.to_json(include: :workout_plans)
     end
 
+    get '/users/:id/workoutplan' do
+        workout_plan = User.body_parts_with_exercises(params[:id])
+        workout_plan.to_json
+      end
+      
     get '/workoutplan' do
-        workoutplan = Workout_plan.all
+        workoutplan = WorkoutPlan.all
         workoutplan.to_json
     end
 
-    get '/workoutexercise' do
-        workout_plans = WorkoutPlan.all
-        workout_plans.to_json(include: { body_parts: { 
-            include: :exercises } })
+    get '/bodypartexercises' do
+        bodypartexercises = BodyPart.all
+        bodypartexercises.to_json(include: :exercise)
     end
 
     get '/bodypart' do
-        body_parts = Body_part.all
+        body_parts = BodyPart.all
         body_parts.to_json
     end
 
