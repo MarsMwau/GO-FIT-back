@@ -15,11 +15,9 @@ class User < ActiveRecord::Base
         day: workout_plan.day,
         body_parts: workout_plan.body_parts.map do |body_part|
           exercise = body_part.exercise
-          {
-            body_part_id: body_part.id,
-            body_part_name: body_part.body_part_name,
-            workout_kind: body_part.workout_kind,
-            exercise: {
+  
+          exercise_data = if exercise.present?
+            {
               exercise_id: exercise.id,
               exercise_name: exercise.exercise_name,
               exercise_type: exercise.exercise_type,
@@ -31,10 +29,19 @@ class User < ActiveRecord::Base
               body_part_id: exercise.body_part_id,
               workout_plan_id: exercise.workout_plan_id
             }
+          else
+            nil
+          end
+  
+          {
+            body_part_id: body_part.id,
+            body_part_name: body_part.body_part_name,
+            workout_kind: body_part.workout_kind,
+            exercise: exercise_data
           }
         end
       }
     end
   end
-
 end
+  

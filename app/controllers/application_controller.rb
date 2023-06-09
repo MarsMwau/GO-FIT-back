@@ -1,5 +1,14 @@
+require 'rack/cors'
 class ApplicationController < Sinatra::Base
+    use Rack::Cors do
+        allow do
+          origins 'http://localhost:3000' 
+          resource '*', headers: :any, methods: [:get, :post, :patch, :delete, :options]
+        end
+      end
+
     set default_content_type: "application/json"
+    set :logging, true
 
     # Get controllers
     get '/users' do
@@ -27,7 +36,7 @@ class ApplicationController < Sinatra::Base
         bodypartexercises.to_json(include: :exercise)
     end
 
-    get '/bodypart' do
+    get '/bodyparts' do
         body_parts = BodyPart.all
         body_parts.to_json
     end
@@ -72,27 +81,65 @@ class ApplicationController < Sinatra::Base
             { error: 'User not found' }.to_json
         end
     end
-    
+
     post '/workoutplans' do
-        workout_plan_params = params[:workout_plan]
-        body_parts_params = workout_plan_params.delete(:body_parts)
-        
-        # Create the workout plan
-        workout_plan = WorkoutPlan.create(workout_plan_params)
-        
-        # Create the body parts and associated exercises
-        body_parts_params.each do |body_part_params|
+        begin
+          workout_plan_params = params[:workout_plan]
+          body_parts_params = workout_plan_params.delete(:body_parts)
+      
+          # Create the workout plan
+          workout_plan = WorkoutPlan.create!(workout_plan_params)
+      
+          # Create the body parts and associated exercises
+          body_parts_params.each do |body_part_params|
             exercises_params = body_part_params.delete(:exercises)
-            
+      
             # Create the body part
-            body_part = workout_plan.body_parts.create(body_part_params)
+            body_part = workout_plan.body_parts.create!(body_part_params)
+      
             # Create the exercises for the body part
             exercises_params.each do |exercise_params|
-                body_part.exercises.create(exercise_params)
+              body_part.exercises.create!(exercise_params)
             end
+          end
+      
+          status 201
+          workout_plan.to_json(include: { body_parts: { include: :exercises } })
+        rescue StandardError => e
+          status 500
+          { error: e.message }.to_json
         end
-        workout_plan.to_json(include: { body_parts: { include: :exercises } })
-    end
+      end
+
+      patch '/users/:user_id/workoutplan/exercises/:exercise_id' do
+        user = User.find(params[:user_id])
+      
+        if user.workout_plans.empty?
+          status 404
+          return { error: 'Workout plan not found for the user' }.to_json
+        end
+      
+        exercise = user.workout_plans.first.exercises.find_by(id: params[:exercise_id])
+      
+        if exercise.nil?
+          status 404
+          return { error: 'Exercise not found' }.to_json
+        end
+      
+        exercise.sets = params[:sets]
+        exercise.reps = params[:reps]
+        exercise.exercise_description = params[:description]
+      
+        if exercise.save
+          { message: 'Exercise updated successfully' }.to_json
+        else
+          status 500
+          { error: 'Error updating exercise' }.to_json
+        end
+      end
+      
+      
+      
 
     # Patch controllers
     patch '/users/:id' do
@@ -131,6 +178,19 @@ class ApplicationController < Sinatra::Base
         end
       
         workout_plan.to_json(include: { body_parts: { include: :exercises } })
+      end
+
+      patch '/exercises/:id' do
+        begin
+          exercise = Exercise.find(params[:id])
+          exercise.description = params[:description]
+          exercise.save
+      
+          { message: 'Exercise description updated successfully' }.to_json
+        rescue StandardError => e
+          status 500
+          { message: "Error updating exercise description: #{e.message}" }.to_json
+        end
       end
 
     # Delete controllers

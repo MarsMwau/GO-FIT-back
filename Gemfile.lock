@@ -57,6 +57,8 @@ GEM
     rack (2.2.7)
     rack-contrib (2.3.0)
       rack (~> 2.0)
+    rack-cors (2.0.1)
+      rack (>= 2.0.0)
     rack-protection (3.0.6)
       rack
     rack-test (2.1.0)
@@ -106,6 +108,7 @@ DEPENDENCIES
   puma
   rack (~> 2.2.7)
   rack-contrib
+  rack-cors
   railties
   rake
   require_all

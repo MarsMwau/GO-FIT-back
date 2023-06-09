@@ -16,6 +16,7 @@ gem 'rerun'
 gem 'puma'
 gem 'rack', '~> 2.2.7'
 gem 'rack-contrib'
+gem 'rack-cors'
 
 # Provides functionality to interact with a SQLite3 database
 # https://github.com/sparklemotion/sqlite3-ruby

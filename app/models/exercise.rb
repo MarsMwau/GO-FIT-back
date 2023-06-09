@@ -1,4 +1,6 @@
 class Exercise < ActiveRecord::Base
+  attr_accessor :description
+  
     has_many :body_parts
     has_many :workout_plans, through: :body_parts
 

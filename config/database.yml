@@ -19,4 +19,11 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  url: postgresql://postgres:GoLJeO1KFV80bJISy548@containers-us-west-146.railway.app:6775/railway
+  database: railway
+  username: postgres
+  password: GoLJeO1KFV80bJISy548
+  host: containers-us-west-146.railway.app
+  port: 6775
+  pool: 5
