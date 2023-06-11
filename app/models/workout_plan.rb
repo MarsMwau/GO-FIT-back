@@ -1,7 +1,7 @@
 class WorkoutPlan < ActiveRecord::Base
-    belongs_to :user
-    has_many :body_parts
-    has_many :exercises, through: :body_parts
+  belongs_to :user
+  has_many :exercises
+  has_many :body_parts, through: :exercises
 
     # Instance methods
   def total_exercises

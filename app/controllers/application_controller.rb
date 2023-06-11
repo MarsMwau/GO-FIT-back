@@ -21,19 +21,20 @@ class ApplicationController < Sinatra::Base
         user.to_json(include: :workout_plans)
     end
 
-    get '/users/:id/workoutplan' do
-        workout_plan = User.body_parts_with_exercises(params[:id])
-        workout_plan.to_json
-      end
+    get '/users/:id/workoutplans' do
+      user_id = params[:id]
+      workout_plans = User.body_parts_with_exercises(user_id)
+      workout_plans.to_json
+    end
       
     get '/workoutplan' do
         workoutplan = WorkoutPlan.all
         workoutplan.to_json
     end
 
-    get '/bodypartexercises' do
-        bodypartexercises = BodyPart.all
-        bodypartexercises.to_json(include: :exercise)
+    get '/bodyparts_exercises' do
+      body_parts = BodyPart.includes(:exercises).all
+      body_parts.to_json(include: :exercises)
     end
 
     get '/bodyparts' do
