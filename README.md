@@ -1,3 +1,4 @@
+## MARTHA MWAU
 ## GoFit Backend
 This is the backend of the GoFit application, built with Sinatra and ActiveRecord.
 
