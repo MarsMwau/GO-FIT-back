@@ -50,7 +50,7 @@ Users Table
 ![Screenshot from 2023-06-12 22-49-03](https://github.com/MarsMwau/GO-FIT-back/assets/115712038/2581eab6-0f0c-49ce-b208-cb3fbf9693b8)
 
 WorkoutPlan Table
-![Screenshot from 2023-06-12 22-49-39](https://github.com/MarsMwau/GO-FIT-back/assets/115712038/1dcae832-c1b4-41e3-8be2-60c7b794bebd)
+![Screenshot from 2023-06-12 22-49-39](https://github.com/MarsMwau/GO-FIT-back/assets/115712038/0854282f-dba2-4142-a40d-316ba01c5a5f)
 
 
 ## Front End Link
