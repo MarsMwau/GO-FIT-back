@@ -44,10 +44,12 @@ Bodyparts Table
 ![Screenshot from 2023-06-12 22-47-41](https://github.com/MarsMwau/GO-FIT-back/assets/115712038/0a78832c-3c6e-42b8-b4e5-d741915b664d)
 
 Exercises Table
+![Screenshot from 2023-06-12 23-06-08](https://github.com/MarsMwau/GO-FIT-back/assets/115712038/b040b4e5-5230-4533-8b89-42220e377762)
 
 
 Users Table
 ![Screenshot from 2023-06-12 22-49-03](https://github.com/MarsMwau/GO-FIT-back/assets/115712038/2581eab6-0f0c-49ce-b208-cb3fbf9693b8)
+
 
 WorkoutPlan Table
 ![Screenshot from 2023-06-12 22-49-39](https://github.com/MarsMwau/GO-FIT-back/assets/115712038/0854282f-dba2-4142-a40d-316ba01c5a5f)
