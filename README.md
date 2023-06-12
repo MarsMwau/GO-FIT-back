@@ -40,7 +40,17 @@ The backend provides the following API endpoints:
 2. GET /exercises/:id: Fetches a specific exercise by ID.
 
 ## Table Screenshots
+Bodyparts Table
 ![Screenshot from 2023-06-12 22-47-41](https://github.com/MarsMwau/GO-FIT-back/assets/115712038/0a78832c-3c6e-42b8-b4e5-d741915b664d)
+
+Exercises Table
+![Screenshot from 2023-06-12 22-49-03](https://github.com/MarsMwau/GO-FIT-back/assets/115712038/5337896f-82d9-4057-8b7e-f9e5eaf03402)
+
+Users Table
+![Screenshot from 2023-06-12 22-47-41](https://github.com/MarsMwau/GO-FIT-back/assets/115712038/d9486ef2-72ee-48d3-8fa9-9153f3deebaf)
+
+WorkoutPlan Table
+![Screenshot from 2023-06-12 22-49-03](https://github.com/MarsMwau/GO-FIT-back/assets/115712038/2581eab6-0f0c-49ce-b208-cb3fbf9693b8)
 
 ## Front End Link
 This is the Github link to my Frontend that is made up of React.
