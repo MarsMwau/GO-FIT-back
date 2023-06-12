@@ -19,28 +19,24 @@ bundle install
 
 ### API Endpoints
 The backend provides the following API endpoints:
-
 ## Users
-GET /users: Fetches all users.
-GET /users/:id: Fetches a specific user by ID.
-POST /users: Creates a new user.
-PATCH /users/:id: Updates a user.
-DELETE /users/:id: Deletes a user.
-
+1. GET /users: Fetches all users.
+2. GET /users/:id: Fetches a specific user by ID.
+3. POST /users: Creates a new user.
+4. PATCH /users/:id: Updates a user.
+5. DELETE /users/:id: Deletes a user.
 ## Workout Plans
-GET /users/:user_id/workoutplans: Fetches all workout plans for a specific user.
-GET /users/:user_id/workoutplans/:id: Fetches a specific workout plan for a user.
-POST /users/:user_id/workoutplans: Creates a new workout plan for a user.
-PATCH /users/:user_id/workoutplans/:id: Updates a workout plan for a user.
-DELETE /users/:user_id/workoutplans/:id: Deletes a workout plan for a user.
-
+1. GET /users/:user_id/workoutplans: Fetches all workout plans for a specific user.
+2. GET /users/:user_id/workoutplans/:id: Fetches a specific workout plan for a user.
+3. POST /users/:user_id/workoutplans: Creates a new workout plan for a user.
+4. PATCH /users/:user_id/workoutplans/:id: Updates a workout plan for a user.
+5. DELETE /users/:user_id/workoutplans/:id: Deletes a workout plan for a user.
 ## Body Parts
-GET /bodyparts: Fetches all body parts.
-GET /bodyparts/:id: Fetches a specific body part by ID.
-
+1. GET /bodyparts: Fetches all body parts.
+2. GET /bodyparts/:id: Fetches a specific body part by ID.
 ## Exercises
-GET /exercises: Fetches all exercises.
-GET /exercises/:id: Fetches a specific exercise by ID.
+1. GET /exercises: Fetches all exercises.
+2. GET /exercises/:id: Fetches a specific exercise by ID.
 
 ## Front end link
 https://github.com/MarsMwau/GO-FIT-front
