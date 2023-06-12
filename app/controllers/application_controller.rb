@@ -1,11 +1,12 @@
 require 'rack/cors'
 class ApplicationController < Sinatra::Base
-    use Rack::Cors do
-        allow do
-          origins 'http://localhost:3000' 
-          resource '*', headers: :any, methods: [:get, :post, :patch, :delete, :options]
-        end
-      end
+  use Rack::Cors do
+    allow do
+      origins 'http://localhost:3000' 
+      resource '*', headers: :any, methods: [:get, :post, :patch, :delete, :options], expose: ['Access-Control-Allow-Origin']
+    end
+  end
+  
 
     set default_content_type: "application/json"
     set :logging, true
@@ -112,6 +113,53 @@ class ApplicationController < Sinatra::Base
         end
       end
 
+      post '/workout_plans' do
+        request_body = JSON.parse(request.body.read)
+      
+        # Extract user_id from the request body
+        user_id = request_body['user_id']
+      
+        # Create a new workout plan for the user
+        workout_plan = WorkoutPlan.new(user_id: user_id)
+        workout_plan.save
+      
+        # Iterate over the body_parts array in the request body
+        request_body['body_parts'].each do |body_part_params|
+          # Create a new body part associated with the workout plan
+          body_part = BodyPart.new(
+            body_part_name: body_part_params['body_part_name'],
+            image: body_part_params['body_part_image'],
+            workout_kind: body_part_params['workout_kind'],
+            workout_plan: workout_plan
+          )
+          body_part.save
+      
+          # Iterate over the exercises array in the current body part
+          body_part_params['exercises'].each do |exercise_params|
+            # Create a new exercise associated with the body part and workout plan
+            exercise = Exercise.new(
+              exercise_name: exercise_params['exercise_name'],
+              exercise_type: exercise_params['exercise_type'],
+              exercise_image: exercise_params['exercise_image'],
+              exercise_description: exercise_params['exercise_description'],
+              weight_kgs: exercise_params['weight_kgs'],
+              sets: exercise_params['sets'],
+              reps: exercise_params['reps'],
+              body_part: body_part,
+              workout_plan: workout_plan
+            )
+            exercise.save
+          end
+        end
+        status 201
+  content_type :json
+  { message: 'Workout plan created successfully', workout_plan: workout_plan }.to_json
+rescue StandardError => e
+  status 500
+  { error: e.message }.to_json
+end
+      
+
       patch '/users/:user_id/workoutplan/exercises/:exercise_id' do
         user = User.find(params[:user_id])
       
@@ -202,9 +250,13 @@ class ApplicationController < Sinatra::Base
     end
 
     delete '/workoutplans/:id' do
-        workout_plan = WorkoutPlan.find(params[:id])
-        workout_plan.destroy
-        { message: 'Workout plan deleted successfully' }.to_json
-    end 
+  workout_plan = WorkoutPlan.find(params[:id])
+
+  if workout_plan.destroy
+    { message: 'Workout plan deleted successfully' }.to_json
+  else
+    { message: 'Failed to delete workout plan' }.to_json
+  end
+end
 
 end
