@@ -47,10 +47,10 @@ Exercises Table
 
 
 Users Table
-
+![Screenshot from 2023-06-12 22-49-03](https://github.com/MarsMwau/GO-FIT-back/assets/115712038/2581eab6-0f0c-49ce-b208-cb3fbf9693b8)
 
 WorkoutPlan Table
-![Screenshot from 2023-06-12 22-49-03](https://github.com/MarsMwau/GO-FIT-back/assets/115712038/2581eab6-0f0c-49ce-b208-cb3fbf9693b8)
+
 
 ## Front End Link
 This is the Github link to my Frontend that is made up of React.
