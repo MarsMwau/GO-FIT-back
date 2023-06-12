@@ -42,3 +42,16 @@ The backend provides the following API endpoints:
 ## Front End Link
 This is the Github link to my Frontend that is made up of React.
 https://github.com/MarsMwau/GO-FIT-front
+
+## Technologies Used
+1. Ruby.
+2. Sinatra
+3. Active Record
+4. Sqllite3
+
+## Contact Information
+* Email : marthamumbua16@gmail.com
+
+## [License](LICENSE)
+MIT License
+Copyright (c) 2023 Martha Mwau
